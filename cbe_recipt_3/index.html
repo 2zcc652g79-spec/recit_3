@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CBE Receipt Viewer</title>
+
+  <!-- Inter Google Font (Same as original Nuxt/Tailwind CBE site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon (Official CBE Logo) -->
+  <link rel="icon" type="image/png" href="assets/cbe_logo.png" />
+  <link rel="shortcut icon" type="image/png" href="assets/cbe_logo.png" />
+  <link rel="apple-touch-icon" href="assets/cbe_logo.png" />
+
+  <!-- Preload CBE Spinner Asset for Instant 0-delay Render -->
+  <link rel="preload" as="image" href="assets/cbe_logo.png" />
+  <script>window.__loaderStartTime = performance.now();</script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ==========================================================================
+       OFFICIAL CBE MOBILE RECEIPT LOADER
+       Exact 1:1 match to mbreciept.cbe.com.et:
+       Soft lavender circular disc with rotating gold CBE emblem & "Loading receipt..."
+       ========================================================================== -->
+  <div id="cbeLoader" class="cbe-loader-overlay" aria-live="polite" role="status">
+    <div class="cbe-loader-container">
+      <div class="cbe-loader-circle">
+        <img src="assets/cbe_logo.png" alt="Commercial Bank of Ethiopia" class="cbe-loader-spinner" loading="eager" decoding="sync" />
+      </div>
+      <p class="cbe-loading-text">Loading receipt<span class="cbe-dots">...</span></p>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN RECEIPT PAGE CONTAINER
+       Responsive: fits full-width on mobile, max-w-3xl (768px) on tablet/desktop
+       ========================================================================== -->
+  <div class="receipt-page">
+    <main class="receipt-card">
+
+      <!-- ======================================================================
+           RECEIPT HEADER BANNER
+           Official CBE Deep Purple (#83257a) with official CBE emblem
+           ====================================================================== -->
+      <header class="receipt-header">
+
+        <!-- Official CBE Logo Emblem (Clickable to replay loading animation for instructor demo) -->
+        <div class="header-logo-container" onclick="if(window.simulateCBELoader) window.simulateCBELoader(1800);" title="Click to replay CBE loading animation">
+          <img src="assets/cbe.webp" alt="Commercial Bank of Ethiopia Emblem" class="cbe-emblem" />
+        </div>
+
+        <div class="header-title-container">
+          <!-- ==================================================== -->
+          <!-- INPUT: Bank Name -->
+          <!-- ==================================================== -->
+          <h1 class="bank-title">Commercial Bank of Ethiopia</h1>
+
+          <!-- ==================================================== -->
+          <!-- INPUT: Document Type -->
+          <!-- ==================================================== -->
+          <h2 class="receipt-type">Customer Receipt</h2>
+
+          <!-- ==================================================== -->
+          <!-- INPUT: Transaction Status -->
+          <!-- ==================================================== -->
+          <div class="status-badge">Status: COMPLETED</div>
+        </div>
+      </header>
+
+      <!-- ======================================================================
+           RECEIPT CONTENT BODY
+           ====================================================================== -->
+      <div class="receipt-content">
+
+        <!-- ====================================================================
+             TWO-COLUMN INFORMATION GRID (Company & Customer Info)
+             Desktop/Tablet: 2 Columns | Mobile: Stacked gracefully
+             ==================================================================== -->
+        <section class="info-section-grid">
+
+          <!-- ==================================================================
+               COLUMN 1: COMPANY ADDRESS & OTHER INFORMATION
+               ================================================================== -->
+          <div class="info-column">
+            <h3 class="info-header">Company Address &amp; Other Information</h3>
+            <table class="info-table">
+              <tbody>
+                <tr>
+                  <td class="lbl">Country:</td>
+                  <!-- INPUT: Company Country -->
+                  <td class="val">Ethiopia</td>
+                </tr>
+                <tr>
+                  <td class="lbl">City:</td>
+                  <!-- INPUT: Company City -->
+                  <td class="val">Addis Ababa</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Address:</td>
+                  <!-- INPUT: Company Address -->
+                  <td class="val address-val">Ras Desta Damtew St, 01,<br>Kirkos</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Postal code:</td>
+                  <!-- INPUT: Postal Code -->
+                  <td class="val">255</td>
+                </tr>
+                <tr>
+                  <td class="lbl">SWIFT Code:</td>
+                  <!-- INPUT: SWIFT Code -->
+                  <td class="val">CBETETAA</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Email:</td>
+                  <!-- INPUT: Company Email -->
+                  <td class="val">info@cbe.com.et</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Tel:</td>
+                  <!-- INPUT: Telephone Number -->
+                  <td class="val">+251-551-50-04</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Fax:</td>
+                  <!-- INPUT: Fax Number -->
+                  <td class="val">+251-551-45-22</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Tin:</td>
+                  <!-- INPUT: Company TIN -->
+                  <td class="val">0000006966</td>
+                </tr>
+                <tr>
+                  <td class="lbl">VAT Receipt No:</td>
+                  <!-- INPUT: VAT Receipt Number -->
+                  <td class="val">FT26250S43CG</td>
+                </tr>
+                <tr>
+                  <td class="lbl">VAT Registration No:</td>
+                  <!-- INPUT: VAT Registration Number -->
+                  <td class="val">011140</td>
+                </tr>
+                <tr>
+                  <td class="lbl">VAT Registration Date:</td>
+                  <!-- INPUT: VAT Registration Date -->
+                  <td class="val">01/01/2003</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ==================================================================
+               COLUMN 2: CUSTOMER INFORMATION
+               ================================================================== -->
+          <div class="info-column">
+            <h3 class="info-header">Customer Information</h3>
+            <table class="info-table">
+              <tbody>
+                <tr>
+                  <td class="lbl">Customer Name:</td>
+                  <!-- INPUT: Customer Full Name -->
+                  <td class="val customer-name-val">Furutuna Amaha Araya</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Region:</td>
+                  <!-- INPUT: Customer Region -->
+                  <td class="val">-</td>
+                </tr>
+                <tr>
+                  <td class="lbl">City:</td>
+                  <!-- INPUT: Customer City -->
+                  <td class="val">-</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Sub City:</td>
+                  <!-- INPUT: Customer Sub City -->
+                  <td class="val">-</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Wereda/Kebele:</td>
+                  <!-- INPUT: Customer Wereda/Kebele -->
+                  <td class="val">-</td>
+                </tr>
+                <tr>
+                  <td class="lbl">VAT Registration No:</td>
+                  <!-- INPUT: Customer VAT Registration Number -->
+                  <td class="val">-</td>
+                </tr>
+                <tr>
+                  <td class="lbl">VAT Registration Date:</td>
+                  <!-- INPUT: Customer VAT Registration Date -->
+                  <td class="val">-</td>
+                </tr>
+                <tr>
+                  <td class="lbl">TIN (TAX ID):</td>
+                  <!-- INPUT: Customer TIN (TAX ID) -->
+                  <td class="val">-</td>
+                </tr>
+                <tr>
+                  <td class="lbl">Branch:</td>
+                  <!-- INPUT: Customer Branch -->
+                  <td class="val">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <!-- ====================================================================
+             SECTION 3: PAYMENT / TRANSACTION INFORMATIONS (13 ROWS)
+             ==================================================================== -->
+        <section class="transaction-box">
+          <div class="transaction-box-header">
+            Payment / Transaction Informations
+          </div>
+
+          <div class="transaction-table-container">
+            <!-- Official CBE Stamp overlay (Positioned exactly as original: -28deg tilt) -->
+            <div class="stamp-overlay-wrapper" aria-hidden="true">
+              <img src="assets/cbestamp.webp" alt="Commercial Bank of Ethiopia Official Stamp"
+                class="official-cbe-stamp" />
+            </div>
+
+            <table class="transaction-table">
+              <tbody>
+                <!-- ROW 1: Payer -->
+                <tr>
+                  <td class="tx-lbl">Payer:</td>
+                  <!-- INPUT: Payer Name -->
+                  <td class="tx-val">Furutuna Amaha Araya</td>
+                </tr>
+
+                <!-- ROW 2: Payer Account -->
+                <tr>
+                  <td class="tx-lbl">Account:</td>
+                  <!-- INPUT: Payer Account Number -->
+                  <td class="tx-val">1****5881</td>
+                </tr>
+
+                <!-- ROW 3: Receiver -->
+                <tr>
+                  <td class="tx-lbl">Receiver:</td>
+                  <!-- INPUT: Receiver Name -->
+                  <td class="tx-val">Awet Kidanemariyam Ytbarek</td>
+                </tr>
+
+                <!-- ROW 4: Receiver Account -->
+                <tr>
+                  <td class="tx-lbl">Account:</td>
+                  <!-- INPUT: Receiver Account Number -->
+                  <td class="tx-val">1****0019</td>
+                </tr>
+
+                <!-- ROW 5: Payment Type -->
+                <tr>
+                  <td class="tx-lbl">Payment Type:</td>
+                  <!-- INPUT: Payment Type -->
+                  <td class="tx-val">MB Transfer</td>
+                </tr>
+
+                <!-- ROW 6: Payment Date & Time -->
+                <tr>
+                  <td class="tx-lbl">Payment Date &amp; Time:</td>
+                  <!-- INPUT: Payment Date & Time -->
+                  <td class="tx-val">Sep 07, 2026 03:51 PM</td>
+                </tr>
+
+                <!-- ROW 7: Reference No. (VAT Invoice No) -->
+                <tr>
+                  <td class="tx-lbl">Reference No. (VAT Invoice No):</td>
+                  <!-- INPUT: Reference No. / VAT Invoice Number -->
+                  <td class="tx-val">FT26250S43CG</td>
+                </tr>
+
+                <!-- ROW 8: Reason / Type of service -->
+                <tr>
+                  <td class="tx-lbl">Reason / Type of service:</td>
+                  <!-- INPUT: Reason or Type of Service -->
+                  <td class="tx-val">MB Transfer</td>
+                </tr>
+
+                <!-- ROW 9: Transferred Amount -->
+                <tr>
+                  <td class="tx-lbl">Transferred Amount:</td>
+                  <!-- INPUT: Transferred Amount -->
+                  <td class="tx-val">5000.00 ETB</td>
+                </tr>
+
+                <!-- ROW 10: Service Charge -->
+                <tr>
+                  <td class="tx-lbl">Service Charge:</td>
+                  <!-- INPUT: Service Charge -->
+                  <td class="tx-val">1.00 ETB</td>
+                </tr>
+
+                <!-- ROW 11: VAT (15% of service charge) -->
+                <tr>
+                  <td class="tx-lbl">VAT (15% of service charge):</td>
+                  <!-- INPUT: VAT Amount -->
+                  <td class="tx-val">0.15 ETB</td>
+                </tr>
+
+                <!-- ROW 12: Disaster Risk Response Fund (5% of service charge) -->
+                <tr>
+                  <td class="tx-lbl">Disaster Risk Response Fund (5% of service charge):</td>
+                  <!-- INPUT: Disaster Risk Response Fund Amount -->
+                  <td class="tx-val">0.05 ETB</td>
+                </tr>
+
+                <!-- ROW 13: Total amount debited from customer's account -->
+                <tr class="total-row">
+                  <td class="tx-lbl total-lbl">Total amount debited from customer's account:</td>
+                  <!-- INPUT: Total Amount Debited -->
+                  <td class="tx-val total-val">5001.20 ETB</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             SECTION 4: AMOUNT IN WORD & VERIFICATION QR CODE
+             ==================================================================== -->
+        <section class="amount-word-container">
+          <div class="amount-word-info">
+            <!-- INPUT: Amount in Word Heading -->
+            <div class="amount-word-label">Amount in Word:</div>
+            <!-- INPUT: Amount in Word Text -->
+            <div class="amount-word-text">Five Thousand One ETB and Twenty cents</div>
+          </div>
+          <div class="qr-container">
+            <!-- INPUT: Verification QR Code -->
+            <img src="assets/cbe_qr.svg" alt="Official CBE Verification QR Code" class="qr-code-img" />
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             SECTION 5: FOOTER (Slogan & Copyright)
+             ==================================================================== -->
+        <footer class="receipt-footer">
+          <!-- INPUT: Slogan -->
+          <div class="footer-slogan">The Bank you can always rely on.</div>
+          <!-- INPUT: Copyright -->
+          <div class="footer-copyright">&copy; 2026 Commercial Bank of Ethiopia. All rights reserved.</div>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       FLOATING "DOWNLOAD PDF" BUTTON
+       Matches user's requirement: Clean, bottom-positioned, hides on print
+       ========================================================================== -->
+  <div class="download-bar">
+    <button class="btn-download" onclick="window.print()" title="Download or Print Receipt as PDF">
+      Download PDF
+    </button>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast-notification" role="alert" aria-live="assertive">
+    <span id="toastMessage"></span>
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
